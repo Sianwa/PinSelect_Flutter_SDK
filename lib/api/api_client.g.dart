@@ -19,24 +19,35 @@ class _APIClient implements APIClient {
   String? baseUrl;
 
   @override
-  Future<dynamic> initializeService(requestPayloadModel) async {
+  Future<InitResponseModel> initializeService(requestPayloadModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = requestPayloadModel;
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _headers = <String, dynamic>{
+      r'InstID': '54',
+      r'Nonce': 'd180fa188a9548139d5ab69b3438db72',
+      r'Timestamp': '1709280789113',
+      r'SignatureMethod': 'SHA1',
+      r'Signature': 'SiYdARRXG2AO15Z8wxwvd4gx1mU=',
+      r'Authorization':
+          'InterswitchAuth SUtJQTk3MUZCNTk5NkVBREJEMTY1MzQ0OTRDQjg3QjkwRDFEQjNFQUQxMDU=',
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(requestPayloadModel.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<InitResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'identity/api/v1/web/initialize',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              'identity/api/v1/web/initialize',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = InitResponseModel.fromJson(_result.data!);
     return value;
   }
 

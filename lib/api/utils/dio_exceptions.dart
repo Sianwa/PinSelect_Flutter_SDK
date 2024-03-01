@@ -26,7 +26,7 @@ class DioExceptions implements Exception{
           errorMessage = 'No Internet Connection';
           break;
         }
-        errorMessage = 'Unexpected error occurred.';
+        errorMessage = dioError.message.toString();
         break;
       default:
         errorMessage = 'Oops! Something went wrong';

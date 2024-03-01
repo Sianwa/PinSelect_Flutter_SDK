@@ -40,7 +40,6 @@ class HeaderGenerator {
     // Creating a URLRequest object and encoding it
     http.Request request = http.Request("POST", uri);
     String encodedUrl = Uri.encodeFull(uri.toString());
-   debugPrint(request.url.toString());
 
     List<String> signatureItems = [
       httpRequest,

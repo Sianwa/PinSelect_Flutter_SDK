@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_pom/api/utils/auth_interceptor.dart';
+import 'package:flutter_pom/utils/header_generation.dart';
 
 import 'api_client.dart';
 
@@ -12,6 +14,13 @@ class Client{
         receiveTimeout: 120000
       )
     );
+
+    // Add an interceptor to log requests and responses
+    dio.interceptors.add(LogInterceptor(
+      request: true,
+      responseBody: true,
+      responseHeader: true,
+    ));
 
     return APIClient(dio);
   }

@@ -12,13 +12,13 @@ dependencies:
     sdk: flutter
 
   mqtt_client: ^9.5.9
-  dio: ^4.0.0
-  retrofit: ^3.0.1+1
+  dio: ^4.0.6
+  retrofit: any
   json_annotation: ^4.6.0
   built_value: ^8.1.2
   webview_flutter: ^2.0.13
   flutter_dotenv: ^5.0.2
-  url_launcher: ^6.0.3
+  url_launcher: any
   http: ^1.1.0
   crypto: ^3.0.3
 
@@ -28,7 +28,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner: ^2.2.0
-  json_serializable: ^6.3.1
+  json_serializable: ^6.7.1
   retrofit_generator: ^4.0.3
   built_value_generator: ^8.0.4
 

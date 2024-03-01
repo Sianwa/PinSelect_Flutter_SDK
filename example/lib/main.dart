@@ -41,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
       "https://pom-test.interswitch-ke.com/f5be0d7e-cb54-4c05-b9a2-79197265b5d5?callbackUrl=www.google.com";
   final String uuid = "f5be0d7e-cb54-4c05-b9a2-79197265b5d5";
 
-  final String serialNumber = "serialNumber";
-  final bool isDebit = false;
+  final String serialNumber = "1410916";
+  final bool isDebit = true;
 
   final String clientID = "IKIA971FB5996EADBD16534494CB87B90D1DB3EAD105";
   final String clientSecret = "ONcmxGU4B+A+qaHp+/Nw19yO9w117PY36/SxsH1A1Wc=";

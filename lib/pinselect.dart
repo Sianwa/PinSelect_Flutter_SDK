@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_pom/api/models/AccountModel.dart';
 import 'package:flutter_pom/api/models/InstitutionModel.dart';
 import 'package:flutter_pom/api/models/RequestPayloadModel.dart';
+import 'package:flutter_pom/api/repositories/ServiceRepository.dart';
 import 'package:flutter_pom/utils/header_generation.dart';
 import 'package:flutter_pom/utils/mqtt_manager.dart';
 
@@ -10,6 +11,7 @@ import 'models/Urls.dart';
 class PinSelect {
   late bool live;
   HeaderGenerator headerGenerator = HeaderGenerator();
+  ServiceRepository serviceRepository = ServiceRepository();
 
   Urls urls = Urls(
       pomBaseUrl: 'https://testids.interswitch.co.ke/',
@@ -37,13 +39,9 @@ class PinSelect {
           "${urls.pomBaseUrl}identity/api/v1/web/initialize",
           "");
 
-      debugPrint("HEADERS:: ${headers.toString()}");
-
-      RequestPayloadModel requestPayloadModel = RequestPayloadModel(
-          Account(accountModel.cardSerNo, accountModel.isDebit),
-          Institution(institutionModel.callbackURL, institutionModel.institutionId));
-
-
+      var resp = serviceRepository.initializeService(RequestPayloadModel(account: Account(cardSerialNumber: accountModel.cardSerNo, isDebit: accountModel.isDebit),
+          institution: Institution(callbackUrl: institutionModel.callbackURL, instId: institutionModel.institutionId))
+      );
 
     } catch (e) {
       rethrow;

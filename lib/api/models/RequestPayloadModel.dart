@@ -1,23 +1,70 @@
-import 'package:flutter_pom/api/models/AccountModel.dart';
-import 'package:flutter_pom/api/models/InstitutionModel.dart';
+// To parse this JSON data, do
+//
+//     final requestPayloadModel = requestPayloadModelFromJson(jsonString);
 
-class RequestPayloadModel{
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+RequestPayloadModel requestPayloadModelFromJson(String str) => RequestPayloadModel.fromJson(json.decode(str));
+
+String requestPayloadModelToJson(RequestPayloadModel data) => json.encode(data.toJson());
+
+class RequestPayloadModel {
   Account account;
   Institution institution;
 
-  RequestPayloadModel(this.account, this.institution);
+  RequestPayloadModel({
+    required this.account,
+    required this.institution,
+  });
+
+  factory RequestPayloadModel.fromJson(Map<String, dynamic> json) => RequestPayloadModel(
+    account: Account.fromJson(json["account"]),
+    institution: Institution.fromJson(json["institution"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "account": account.toJson(),
+    "institution": institution.toJson(),
+  };
 }
 
-class Account{
+class Account {
   String cardSerialNumber;
   bool isDebit;
 
-  Account(this.cardSerialNumber, this.isDebit);
+  Account({
+    required this.cardSerialNumber,
+    required this.isDebit,
+  });
+
+  factory Account.fromJson(Map<String, dynamic> json) => Account(
+    cardSerialNumber: json["cardSerialNumber"],
+    isDebit: json["isDebit"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "cardSerialNumber": cardSerialNumber,
+    "isDebit": isDebit,
+  };
 }
 
-class Institution{
-  String callbackURL;
-  int instID;
+class Institution {
+  String callbackUrl;
+  int instId;
 
-  Institution(this.callbackURL, this.instID);
+  Institution({
+    required this.callbackUrl,
+    required this.instId,
+  });
+
+  factory Institution.fromJson(Map<String, dynamic> json) => Institution(
+    callbackUrl: json["callbackURL"],
+    instId: json["instID"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "callbackURL": callbackUrl,
+    "instID": instId,
+  };
 }

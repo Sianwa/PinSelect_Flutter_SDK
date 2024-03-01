@@ -1,26 +1,26 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_pom/api/client.dart';
-import 'package:flutter_pom/api/dio_exceptions.dart';
-import 'package:flutter_pom/api/models/AccountModel.dart';
-import 'package:flutter_pom/api/models/InstitutionModel.dart';
+import 'package:flutter_pom/api/models/InitResponseModel.dart';
+import 'package:flutter_pom/api/utils/dio_exceptions.dart';
 import 'package:flutter_pom/api/models/RequestPayloadModel.dart';
 
 
 class ServiceRepository{
-  final client = Client.init();
-
   ServiceRepository();
+  final client = Client.init();
 
   Future<dynamic> initializeService(RequestPayloadModel requestPayloadModel) async{
     try{
       var resp = await client.initializeService(requestPayloadModel);
-      return resp;
-
+      debugPrint("INITIALIZE RESP:: ");
+      return initResponseModelToJson(resp);
     } on DioError catch(e){
       final errorMsg = DioExceptions.fromDioError(e).toString();
     }
   }
 
+  @deprecated
   Future<dynamic>? getMLE() async{
     try{
       var resp = await client.getMLE();
