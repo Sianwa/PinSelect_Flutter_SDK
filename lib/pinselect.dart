@@ -11,7 +11,7 @@ import 'models/Urls.dart';
 class PinSelect {
   late bool live;
   HeaderGenerator headerGenerator = HeaderGenerator();
-  ServiceRepository serviceRepository = ServiceRepository();
+  late ServiceRepository serviceRepository;
 
   Urls urls = Urls(
       pomBaseUrl: 'https://testids.interswitch.co.ke/',
@@ -36,13 +36,17 @@ class PinSelect {
           institutionModel.institutionId.toString(),
           institutionModel.clientId,
           institutionModel.clientSecret,
-          "${urls.pomBaseUrl}identity/api/v1/web/initialize",
-          "");
+          "POST",
+          "/identity/api/v1/");
 
-      var resp = serviceRepository.initializeService(RequestPayloadModel(account: Account(cardSerialNumber: accountModel.cardSerNo, isDebit: accountModel.isDebit),
-          institution: Institution(callbackUrl: institutionModel.callbackURL, instId: institutionModel.institutionId))
-      );
-
+      serviceRepository = ServiceRepository(headers);
+      var resp = serviceRepository.initializeService(RequestPayloadModel(
+          account: Account(
+              cardSerialNumber: accountModel.cardSerNo,
+              isDebit: accountModel.isDebit),
+          institution: Institution(
+              callbackUrl: institutionModel.callbackURL,
+              id: institutionModel.institutionId)));
     } catch (e) {
       rethrow;
     }

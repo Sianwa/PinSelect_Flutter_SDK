@@ -5,7 +5,7 @@ import 'package:flutter_pom/utils/header_generation.dart';
 import 'api_client.dart';
 
 class Client{
-  static APIClient init(){
+  static APIClient init(Map<String, String> authHeaders){
 
     Dio dio = Dio(
       BaseOptions(
@@ -15,12 +15,17 @@ class Client{
       )
     );
 
+    //Add an interceptor to add auth headers
+    dio.interceptors.add(AuthInterceptor(authHeaders));
+
     // Add an interceptor to log requests and responses
     dio.interceptors.add(LogInterceptor(
       request: true,
       responseBody: true,
       responseHeader: true,
     ));
+
+
 
     return APIClient(dio);
   }

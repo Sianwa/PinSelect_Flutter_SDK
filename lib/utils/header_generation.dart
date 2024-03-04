@@ -26,7 +26,7 @@ class HeaderGenerator {
 
     //Creating the Timestamp
     DateTime now = DateTime.now();
-    String timestamp = now.millisecondsSinceEpoch.toString(); // Dart uses milliseconds since epoch
+    String timestamp = (now.millisecondsSinceEpoch ~/ 1000).toString(); // Dart uses milliseconds since epoch
     Timestamp = timestamp;
 
     //URL Creation
@@ -38,7 +38,6 @@ class HeaderGenerator {
     );
 
     // Creating a URLRequest object and encoding it
-    http.Request request = http.Request("POST", uri);
     String encodedUrl = Uri.encodeFull(uri.toString());
 
     List<String> signatureItems = [
@@ -54,7 +53,7 @@ class HeaderGenerator {
 
     Signature = base64.encode(sha1Bytes);
     String encodedClientId = base64.encode(utf8.encode(clientID));
-    Authorization = "InterswitchAuth ${utf8.decode(base64.decode(encodedClientId))}";
+    Authorization = "InterswitchAuth $encodedClientId";
 
     return {
       "InstID": InstID,

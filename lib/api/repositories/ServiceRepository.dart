@@ -7,11 +7,13 @@ import 'package:flutter_pom/api/models/RequestPayloadModel.dart';
 
 
 class ServiceRepository{
-  ServiceRepository();
-  final client = Client.init();
+  ServiceRepository(this.authHeaders);
+  final Map<String, String> authHeaders;
+
 
   Future<dynamic> initializeService(RequestPayloadModel requestPayloadModel) async{
     try{
+      final client = Client.init(authHeaders);
       var resp = await client.initializeService(requestPayloadModel);
       debugPrint("INITIALIZE RESP:: ");
       return initResponseModelToJson(resp);
@@ -19,16 +21,4 @@ class ServiceRepository{
       final errorMsg = DioExceptions.fromDioError(e).toString();
     }
   }
-
-  @deprecated
-  Future<dynamic>? getMLE() async{
-    try{
-      var resp = await client.getMLE();
-      return resp;
-
-    } on DioError catch(e){
-      final errorMsg = DioExceptions.fromDioError(e).toString();
-    }
-  }
-
 }

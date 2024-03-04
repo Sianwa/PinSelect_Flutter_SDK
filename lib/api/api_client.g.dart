@@ -22,16 +22,7 @@ class _APIClient implements APIClient {
   Future<InitResponseModel> initializeService(requestPayloadModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'InstID': '54',
-      r'Nonce': 'd180fa188a9548139d5ab69b3438db72',
-      r'Timestamp': '1709280789113',
-      r'SignatureMethod': 'SHA1',
-      r'Signature': 'SiYdARRXG2AO15Z8wxwvd4gx1mU=',
-      r'Authorization':
-          'InterswitchAuth SUtJQTk3MUZCNTk5NkVBREJEMTY1MzQ0OTRDQjg3QjkwRDFEQjNFQUQxMDU=',
-    };
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(requestPayloadModel.toJson());
     final _result = await _dio

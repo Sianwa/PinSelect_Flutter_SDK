@@ -51,20 +51,20 @@ class Account {
 
 class Institution {
   String callbackUrl;
-  int instId;
+  int id;
 
   Institution({
     required this.callbackUrl,
-    required this.instId,
+    required this.id,
   });
 
   factory Institution.fromJson(Map<String, dynamic> json) => Institution(
-    callbackUrl: json["callbackURL"],
-    instId: json["instID"],
+    callbackUrl: json["callbackUrl"],
+    id: json["id"],
   );
 
   Map<String, dynamic> toJson() => {
-    "callbackURL": callbackUrl,
-    "instID": instId,
+    "callbackUrl": callbackUrl,
+    "id": id,
   };
 }
