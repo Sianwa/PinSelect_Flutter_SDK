@@ -15,8 +15,8 @@ class ServiceRepository{
     try{
       final client = Client.init(authHeaders);
       var resp = await client.initializeService(requestPayloadModel);
-      debugPrint("INITIALIZE RESP:: ");
-      return initResponseModelToJson(resp);
+      debugPrint("INITIALIZE RESP::${initResponseModelToJson(resp)}");
+      return resp;
     } on DioError catch(e){
       final errorMsg = DioExceptions.fromDioError(e).toString();
     }

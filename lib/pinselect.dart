@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_pom/api/models/AccountModel.dart';
+import 'package:flutter_pom/api/models/InitResponseModel.dart';
 import 'package:flutter_pom/api/models/InstitutionModel.dart';
 import 'package:flutter_pom/api/models/RequestPayloadModel.dart';
 import 'package:flutter_pom/api/repositories/ServiceRepository.dart';
@@ -27,9 +28,7 @@ class PinSelect {
     }
   }
 
-  Future<void> initialize(
-      {required AccountModel accountModel,
-      required InstitutionModel institutionModel}) async {
+  Future<dynamic> initialize({required AccountModel accountModel, required InstitutionModel institutionModel}) async {
     try {
       //generate headers
       var headers = headerGenerator.generateHeaders(
@@ -40,13 +39,16 @@ class PinSelect {
           "/identity/api/v1/");
 
       serviceRepository = ServiceRepository(headers);
-      var resp = serviceRepository.initializeService(RequestPayloadModel(
+
+      var resp = await serviceRepository.initializeService(RequestPayloadModel(
           account: Account(
               cardSerialNumber: accountModel.cardSerNo,
               isDebit: accountModel.isDebit),
           institution: Institution(
               callbackUrl: institutionModel.callbackURL,
               id: institutionModel.institutionId)));
+      return resp;
+
     } catch (e) {
       rethrow;
     }
