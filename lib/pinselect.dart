@@ -15,14 +15,14 @@ class PinSelect {
   late ServiceRepository serviceRepository;
 
   Urls urls = Urls(
-      pomBaseUrl: 'https://testids.interswitch.co.ke/',
+      pomBaseUrl: 'http://pin-on-mobile-tests.test.kube.iswke/',
       mqttBaseUrl: 'testmerchant.interswitch-ke.com');
 
   PinSelect({required this.live}) {
     live = live;
     if (live) {
       Urls liveUrls = Urls(
-          pomBaseUrl: 'https://testids.interswitch.co.ke/',
+          pomBaseUrl: 'https://esb.interswitch.co.ke/',
           mqttBaseUrl: 'merchant.interswitch-ke.com');
       urls = liveUrls;
     }
