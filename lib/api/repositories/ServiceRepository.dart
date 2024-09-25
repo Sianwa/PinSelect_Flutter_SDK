@@ -11,9 +11,9 @@ class ServiceRepository{
   final Map<String, String> authHeaders;
 
 
-  Future<dynamic> initializeService(RequestPayloadModel requestPayloadModel) async{
+  Future<dynamic> initializeService(String baseURL, RequestPayloadModel requestPayloadModel) async{
     try{
-      final client = Client.init(authHeaders);
+      final client = Client.init(authHeaders, baseURL);
       var resp = await client.initializeService(requestPayloadModel);
       debugPrint("INITIALIZE RESP::${initResponseModelToJson(resp)}");
       return resp;

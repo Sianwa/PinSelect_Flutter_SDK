@@ -15,7 +15,7 @@ class PinSelect {
   late ServiceRepository serviceRepository;
 
   Urls urls = Urls(
-      pomBaseUrl: 'http://pin-on-mobile-tests.test.kube.iswke/',
+      pomBaseUrl: 'https://testids.interswitch.co.ke/',
       mqttBaseUrl: 'testmerchant.interswitch-ke.com');
 
   PinSelect({required this.live}) {
@@ -40,13 +40,10 @@ class PinSelect {
 
       serviceRepository = ServiceRepository(headers);
 
-      var resp = await serviceRepository.initializeService(RequestPayloadModel(
-          account: Account(
-              cardSerialNumber: accountModel.cardSerNo,
-              isDebit: accountModel.isDebit),
-          institution: Institution(
-              callbackUrl: institutionModel.callbackURL,
-              id: institutionModel.institutionId)));
+      var resp = await serviceRepository.initializeService(urls.pomBaseUrl, RequestPayloadModel(
+          account: Account(cardSerialNumber: accountModel.cardSerNo, isDebit: accountModel.isDebit),
+          institution: Institution(callbackUrl: institutionModel.callbackURL, id: institutionModel.institutionId)),
+      );
       return resp;
 
     } catch (e) {

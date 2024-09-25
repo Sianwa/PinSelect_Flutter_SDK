@@ -5,11 +5,11 @@ import 'package:flutter_pom/utils/header_generation.dart';
 import 'api_client.dart';
 
 class Client{
-  static APIClient init(Map<String, String> authHeaders){
+  static APIClient init(Map<String, String> authHeaders, String baseURL){
 
     Dio dio = Dio(
       BaseOptions(
-        baseUrl: "https://testids.interswitch.co.ke/",
+        baseUrl: baseURL,
         connectTimeout: 120000,
         receiveTimeout: 120000
       )
