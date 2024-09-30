@@ -59,10 +59,10 @@ class MQTTManager {
       client.disconnect();
 
       if (mqttPayload['responseCode'] == "00" || mqttPayload['responseCode'] == "0") {
-        transactionSuccessfulCallback(mqttPayload["message"]);
+        transactionSuccessfulCallback(mqttPayload);
       }
       else {
-        transactionFailureCallback(mqttPayload["message"]);
+        transactionFailureCallback(mqttPayload);
       }
     });
 
