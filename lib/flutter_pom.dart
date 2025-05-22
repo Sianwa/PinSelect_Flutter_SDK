@@ -26,20 +26,27 @@ class WebViewExampleState extends State<WebViewExample> {
   final String url;
   final Function(Map<String, dynamic>) transactionSuccessfullCallback;
   final Function(Map<String, dynamic>) transactionFailureCallback;
+  late final WebViewController _controller;
+
   WebViewExampleState(this.url, this.transactionSuccessfullCallback,
       this.transactionFailureCallback);
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onNavigationRequest: _interceptNavigation,
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.url));
   }
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      initialUrl: url,
-      javascriptMode: JavascriptMode.unrestricted,
-      navigationDelegate: _interceptNavigation,
+    return Scaffold(
+      body: WebViewWidget(controller: _controller),
     );
   }
 

@@ -10,8 +10,8 @@ class Client{
     Dio dio = Dio(
       BaseOptions(
         baseUrl: baseURL,
-        connectTimeout: 120000,
-        receiveTimeout: 120000
+        connectTimeout:const Duration(milliseconds: 120000),
+        receiveTimeout: const Duration(milliseconds: 120000),
       )
     );
 

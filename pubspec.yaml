@@ -11,14 +11,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  mqtt_client: ^9.5.9
-  dio: ^4.0.6
-  retrofit: any
-  json_annotation: ^4.6.0
-  built_value: ^8.1.2
-  webview_flutter: ^2.0.13
+  mqtt_client: ^10.8.0
+  dio: ^5.8.0+1
+  retrofit: ^4.4.2
+  json_annotation: ^4.9.0
+  built_value: ^8.9.5
+  webview_flutter: ^4.11.0
   flutter_dotenv: ^5.0.2
-  url_launcher: any
+  url_launcher: ^6.3.1
   http: ^1.1.0
   crypto: ^3.0.3
 
@@ -27,10 +27,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  build_runner: ^2.2.0
-  json_serializable: ^6.7.1
-  retrofit_generator: ^4.0.3
-  built_value_generator: ^8.0.4
+  build_runner: ^2.4.15
+  json_serializable: ^6.9.5
+  retrofit_generator: ^9.1.9
+  built_value_generator: ^8.9.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
